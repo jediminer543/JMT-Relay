@@ -1,0 +1,46 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+
+sourceCompatibility = 1.5
+version = '0.1'
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Jedi Relay Client', 'Implementation-Version': version
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
+	compile 'org.eclipse.jetty.websocket:websocket-client:9.3.0.M0'
+	compile 'org.eclipse.jetty.websocket:websocket-server:9.3.0.M0'
+	compile 'com.google.guava:guava:18.0'
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+}
+
+test {
+    systemProperties 'property': 'value'
+}
+
+jar {
+	from {
+		configurations.compile.collect {
+			it.isDirectory() ? it : zipTree(it)
+		}
+		configurations.runtime.collect {
+			it.isDirectory() ? it : zipTree(it)
+		}
+	}
+}
+
+uploadArchives {
+    repositories {
+       flatDir {
+           dirs 'repos'
+       }
+    }
+}
