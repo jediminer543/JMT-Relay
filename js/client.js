@@ -11,10 +11,12 @@ var ePort = parseInt(process.argv[7]) || 18888;
 TYPE = 0;
 SOURCE = 1;
 TARGET = 2;
-DATA = 3;
-NAME = 4;
-IPORT = 5;
-EPORT = 6;
+TARGET_TYPE = 3;
+DATA = 4;
+NAME = 5;
+IPORT = 6;
+EPORT = 7;
+
 var WSrelay = new WebSocket(url);
 WSrelay.on('open', function() {
 	
@@ -26,9 +28,6 @@ WSrelay.on('open', function() {
 });
 var server = net.createServer(function(socket) {
 	
-	//var open = false;
-	var exData = [];
-	
 	socket.on('data', function(data)
 	{
 		//console.log(data.constructor);
@@ -37,22 +36,21 @@ var server = net.createServer(function(socket) {
 		arData[SOURCE] = "client";
 		arData[TARGET] = target;
 		arData[DATA] = data;
-		//console.log(arData.constructor);
+		//console.log("Sending: " + JSON.stringify(arData));
 		WSrelay.send(JSON.stringify(arData));
 	});
 	
 	WSrelay.on('message', function(message) {
-		//console.log(message);
+		//console.log("Recieving: " + message);
 		pMessage = JSON.parse(message);
 		if (pMessage instanceof Array){
 			if (pMessage[TYPE] == "data"){
 				if (pMessage[SOURCE] == target){
-					if (pMessage[TARGET] == target) {
+					if (pMessage[TARGET] == "client") {
 						try {
 						socket.write(new Buffer(pMessage[DATA]));
 						}
 						catch (ex) {
-						server.listen(ePort);
 						}
 					}
 				}

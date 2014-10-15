@@ -15,13 +15,15 @@ var ePort = parseInt(process.argv[7]) || 18888;
 TYPE = 0;
 SOURCE = 1;
 TARGET = 2;
-DATA = 3;
-NAME = 4;
-IPORT = 5;
-EPORT = 6;
+TARGET_TYPE = 3;
+DATA = 4;
+NAME = 5;
+IPORT = 6;
+EPORT = 7;
 
 var relay = new WebSocket(url);
-var server = net.connect(iPort);
+var server = net.connect({ port: iPort, allowHalfOpen: true});
+var lastPacket = null;
 
 relay.on('open', function() {
 	
@@ -40,7 +42,7 @@ relay.on('message', function(message) {
 		if (pMessage[TYPE] == "data"){
 			if (pMessage[SOURCE] == "client"){
 				if (pMessage[TARGET] == name) {
-					
+					//console.log(new Buffer(pMessage[DATA]).constructor);
 					try {
 					server.write(new Buffer(pMessage[DATA]));
 					}
@@ -49,6 +51,13 @@ relay.on('message', function(message) {
 				}
 			}
 		}
+		if (pMessage[TYPE] == "accept"){
+			console.log("Connection Accepted!!")
+		}
+		if (pMessage[TYPE] == "deny"){
+			relay.close();
+			console.log("Name Invalid, Terminating!!")
+		}
 	}
 	else {
 		console.log("Invalid Message!!")
@@ -56,16 +65,18 @@ relay.on('message', function(message) {
 });
 
 server.on('close', function() {
-	console.log("Conection closed")
+	relay.close();
+	console.log("Conection closed");
 
 });
 
 server.on('data', function(data) {
 	
+	//console.log(data.constructor);
 	var arData = [];
 	arData[TYPE] = "data";
 	arData[SOURCE] = name;
-	arData[TARGET] = name;
+	arData[TARGET] = "client";
 	arData[DATA] = data;
 	relay.send(JSON.stringify(arData));
 });
