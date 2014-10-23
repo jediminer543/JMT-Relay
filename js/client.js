@@ -35,7 +35,7 @@ var server = net.createServer(function(socket) {
 		arData[TYPE] = "data";
 		arData[SOURCE] = "client";
 		arData[TARGET] = target;
-		arData[DATA] = data;
+		arData[DATA] = data.toString('hex');
 		//console.log("Sending: " + JSON.stringify(arData));
 		WSrelay.send(JSON.stringify(arData));
 	});
@@ -48,7 +48,7 @@ var server = net.createServer(function(socket) {
 				if (pMessage[SOURCE] == target){
 					if (pMessage[TARGET] == "client") {
 						try {
-						socket.write(new Buffer(pMessage[DATA]));
+						socket.write(new Buffer(pMessage[DATA], 'hex'));
 						}
 						catch (ex) {
 						}

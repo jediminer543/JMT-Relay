@@ -44,7 +44,7 @@ relay.on('message', function(message) {
 				if (pMessage[TARGET] == name) {
 					//console.log(new Buffer(pMessage[DATA]).constructor);
 					try {
-					server.write(new Buffer(pMessage[DATA]));
+					server.write(new Buffer(pMessage[DATA], 'hex'));
 					}
 					catch (ex) {
 					}
@@ -77,6 +77,6 @@ server.on('data', function(data) {
 	arData[TYPE] = "data";
 	arData[SOURCE] = name;
 	arData[TARGET] = "client";
-	arData[DATA] = data;
+	arData[DATA] = data.toString('hex');
 	relay.send(JSON.stringify(arData));
 });
