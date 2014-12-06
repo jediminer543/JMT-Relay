@@ -1,4 +1,4 @@
-package com.jediminer543.relay.host;
+package com.jediminer543.relay.client;
 
 import java.util.ArrayList;
 
@@ -14,10 +14,14 @@ import com.jediminer543.relay.remotes.ShowRemotes;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.GridBagConstraints;
+import javax.swing.JScrollPane;
+import java.awt.Canvas;
+import java.awt.Insets;
 
-public class HostManager {
+public class ClientManager {
 	
-	static ArrayList<Host> hosts = new ArrayList<Host>();
+	//static ArrayList<Host> hosts = new ArrayList<Host>();
 	
 	private static JFrame frame;
 	
@@ -44,10 +48,10 @@ public class HostManager {
 		frame.setBounds(100, 100, 450, 350);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0};
-		gridBagLayout.rowHeights = new int[]{0};
-		gridBagLayout.columnWeights = new double[]{Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[]{0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0};
+		gridBagLayout.columnWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{1.0, Double.MIN_VALUE};
 		frame.getContentPane().setLayout(gridBagLayout);
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -97,7 +101,7 @@ public class HostManager {
 		JMenuItem mntmManage = new JMenuItem("Manage...");
 		mntmManage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				HostManager.setVisibility(true);
+				ClientManager.setVisibility(true);
 			}
 		});
 		mnHost.add(mntmManage);
@@ -115,14 +119,14 @@ public class HostManager {
 		mnHelp.add(mntmAbout);
 	}
 	
-	/**
-	 * 
-	 * 
-	 * @param host Host to add to storage 
-	 */
-	public static void addHost(Host host) {
-		checkInit();
-		hosts.add(host);
-	}
+//	/**
+//	 * 
+//	 * 
+//	 * @param host Host to add to storage 
+//	 */
+//	public static void addHost(Host host) {
+//		checkInit();
+//		hosts.add(host);
+//	}
 	
 }
