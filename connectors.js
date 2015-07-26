@@ -88,9 +88,12 @@ function createHost (name, localPort, localAddress, remoteURI) {
 					console.log(DataIDs.SOURCE + ":" + "Sending: " + JSON.stringify(arData[DataIDs.DATA]));
 					host.relay.send(JSON.stringify(arData));
 				});
+				
+				host.servers[pMessage[DataIDs.SOURCE]].on('error', function (exc) {
+				    console.log("Handling Error: " + exc.name + ". (ECONNRESET is normal)");
+				});
 			}
 			if (pMessage[DataIDs.TYPE] === "end") {
-				host.servers[pMessage[DataIDs.SOURCE]].end();
 				host.servers[pMessage[DataIDs.SOURCE]].destroy();
 				delete host.servers[pMessage[DataIDs.SOURCE]];
 			}
@@ -177,10 +180,11 @@ function createClient(localPort, localAddress, remoteURI, targetName) {
 	});
 	
 	//Local Data Transiever
-	client.server = net.createServer(function(socket) {
+	client.server = net.createServer({allowHalfOpen: false},function(socket) {
 		
 		client.localConnections.push(socket);
 		
+		client.iid++;
 		socket.id =  client.id + "-" + client.iid;
 		
 		
@@ -204,14 +208,26 @@ function createClient(localPort, localAddress, remoteURI, targetName) {
 			client.relay.send(JSON.stringify(arData));
 		});
 		
+		socket.on('error', function (exc) {
+		    console.log("Handling Error: " + exc.name + ". (ECONNRESET is normal)");
+		});
+		
 		socket.on('close', function () {
-			//removeArray(client.localConnections, socket);
+			removeArray(client.localConnections, socket);
+			var packet = [];
+			packet[DataIDs.TYPE] = "end";
+			packet[DataIDs.SOURCE] = socket.id;
+			packet[DataIDs.TARGET] = targetName;
+			packet[DataIDs.DATA] = targetName;
+			client.relay.send(JSON.stringify(packet));
 		});
 		
 		
 	});
 
 	client.server.listen(localPort, localAddress);
+	
+	return client;
 }
 
 module.exports = {
