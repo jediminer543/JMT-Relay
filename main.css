@@ -8,7 +8,7 @@ a, button {
   -webkit-app-region: no-drag;
 }
 
-h1, h2 {
+h1, h2, h3, h4, h5 {
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
 }
@@ -42,7 +42,7 @@ hr {
     -webkit-app-region: drag;
 }
 
-.nav-list-item-link:link, .nav-list-item-link:visited  {
+.nav-list-item-link, .nav-list-item-link:link, .nav-list-item-link:visited  {
     padding-top: 5px;
     padding-bottom: 4px;
     padding-left: 2px;
@@ -65,4 +65,17 @@ hr {
     padding-top: 5px;
     padding-bottom: 7.5px;
     background-color: #B2CCCC;
+}
+
+#info {
+    width: 50%;
+    float: left;
+}
+
+#version-number {
+    display: inline;
+}
+
+#version-version {
+    display:inline;
 }

@@ -11,28 +11,32 @@ var subWindows = [];
 var opening = false;
 
 function openPage (file) {
-	console.log("Loading: " + 'file://' + __dirname + '/' + file);
 	mainWindow.loadUrl('file://' + __dirname + '/' + file);
-	console.log("Load Complete");
-	//mainWindow.show();
 }
 
 ipc.on("openPage", function(event, arg) {
+	event.sender.send("return", "loading");
 	openPage(arg);
 });
 
-//app.on('window-all-closed', function() {
-//		if (process.platform !== 'darwin') {
-//			app.quit();
-//		}
-//});
+app.on('window-all-closed', function() {
+		if (process.platform !== 'darwin') {
+			app.quit();
+		}
+});
 
 app.on('ready', function() {
 	mainWindow = new BrowserWindow({width: 800, height: 600, frame: true, resizable:false});
 	
 	openPage("index.html");
 	
-	//mainWindow.on('closed', function() {
-	    //mainWindow = null;
-	//});
+	mainWindow.on('closed', function() {
+		console.log("closed");
+	    mainWindow = null;
+	});
+	
+	mainWindow.onbeforeunload = function (e) {
+		
+		return false;
+	};
 });

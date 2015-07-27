@@ -3,6 +3,7 @@
 
 <head>
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,500,400italic,500italic,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link href='main.css' rel='stylesheet' type='text/css'>
     <script type="text/javascript">
         var ipc = require('ipc');
@@ -22,15 +23,25 @@
         <h1>JMT Relay Controler</h1>
         <div id=nav>
             <ul id=navlist>
-                <li class=nav-list-item><a class=nav-list-item-link onclick="loadPage('index.html')" href="#">Home</a></li>
-                <li class=nav-list-item><a class=nav-list-item-link onclick="loadPage('status.html')" href="#">Relay Status</a></li>
-                <li class=nav-list-item><a class=nav-list-item-link onclick="loadPage('clientManagement.html')" href="#">Client</a></li>
-                <li class=nav-list-item><a class=nav-list-item-link onclick="loadPage('hostManagement.html')" href="#">Host</a></li>
+                <li class=nav-list-item><a class=nav-list-item-link onclick="loadPage('index.html')" href="javascript:void(0)">Home</a></li>
+                <li class=nav-list-item><a class=nav-list-item-link onclick="loadPage('status.html')" href="javascript:void(0)">Relay Status</a></li>
+                <li class=nav-list-item><a class=nav-list-item-link onclick="loadPage('clientManagement.html')" href="javascript:void(0)">Client</a></li>
+                <li class=nav-list-item><a class=nav-list-item-link onclick="loadPage('hostManagement.html')" href="javascript:void(0)">Host</a></li>
             </ul>
         </div>
-        <div id=about>
-            <h2>About</h2>
+        <div id=info>
+            <h2>Info</h2>
+            <h3>About</h3>
             <p>JMT Relay is a TCP over Websocket (A HTTP Protocol Extention) tool that allows for the routing of data via a remote server, bypassing the need for port forwarding. Remote relays are operatable on any hosting service that supports websockets</p>
+            <h3>Getting started</h3>
+            <p></p>
+        </div>
+        <div id=version>
+            <h2>Version Information</h2>
+            <h3 id=version-version>Version:</h3><h3 id=version-number> 0.0.0</h3>
+            <h3>Release Notes</h3>
+            <p id=version-notes>If you are seeing this then a javascript function broke somewhere. 
+                Please report the bug to the developer imediatly (if at all possible).</p>
         </div>
     </div>
 </body>

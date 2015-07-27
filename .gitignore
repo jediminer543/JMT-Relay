@@ -1,0 +1,15 @@
+# Nodeclipse Files #
+####################
+.jshintrc
+.project
+.tern-project
+.settings
+
+# Node Files #
+##############
+node_modules
+
+# Local Junk #
+##############
+# This if a file within which i keep notes
+info
