@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,500,400italic,500italic,700' rel='stylesheet' type='text/css'>
+    <link href='main.css' rel='stylesheet' type='text/css'>
+    <script type="text/javascript">
+        var ipc = require('ipc');
+        ipc.on("return", function (){
+        	
+        });
+        
+        loadPage = function (pageName) {
+        	ipc.send("openPage", pageName);
+        }
+    </script>
+    <title>JMTRelay: Main</title>
+</head>
+
+<body>
+    <div id=body>
+        <h1>JMT Relay Controler</h1>
+        <div id=nav>
+            <ul id=navlist>
+                <li class=nav-list-item><a class=nav-list-item-link onclick="loadPage('index.html')" href="#">Home</a></li>
+                <li class=nav-list-item><a class=nav-list-item-link onclick="loadPage('status.html')" href="#">Relay Status</a></li>
+                <li class=nav-list-item><a class=nav-list-item-link onclick="loadPage('clientManagement.html')" href="#">Client</a></li>
+                <li class=nav-list-item><a class=nav-list-item-link onclick="loadPage('hostManagement.html')" href="#">Host</a></li>
+            </ul>
+        </div>
+        <div id=about>
+            <h2>About</h2>
+            <p>JMT Relay is a TCP over Websocket (A HTTP Protocol Extention) tool that allows for the routing of data via a remote server, bypassing the need for port forwarding. Remote relays are operatable on any hosting service that supports websockets</p>
+        </div>
+    </div>
+</body>
+
+</html>

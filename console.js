@@ -7,7 +7,7 @@ var commander = require("commander");
 commander
 	.version("0.10.0")
 	.option('-R, --relay <relay>', "Remote Address to connect to (in URI form)", "ws://127.0.0.1:8000")
-	.option('-N, --target-name <port>', "Name to send/recieve to", "default")
+	.option('-N, --target-name <name>', "Name to send/recieve to", "default")
 	.option('-a, --local-address <address>', "Local Address to send/recieve from", "127.0.0.1")
 	.option('-p, --local-port <port>', "Local port to send/recieve from", 8000)
 	.option('-h, --host', "Switch to host mode", false)
