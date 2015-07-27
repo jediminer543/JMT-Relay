@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,500,400italic,500italic,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type='text/css' href="font-awesome/css/font-awesome.min.css">
+    <link href='main.css' rel='stylesheet' type='text/css'>
+    <script type="text/javascript">
+        var ipc = require('ipc');
+        var shell = require('shell');
+        
+        
+        ipc.on("return", function (){
+        	
+        });
+        loadPage = function (pageName) {
+        	ipc.send("openMainPage", pageName);
+        }
+        requestOptions = function() {
+            ipc.send("requestOptions", "main")
+        }
+        requestLicence = function() {
+            ipc.send("requestLicence", "main")
+        }
+        
+        openExternal = shell.openExternal;
+    </script>
+    <title>JMTRelay: Main</title>
+</head>
+<body>
+    <div id=common-header>
+        <div id=head>
+            <h1 id=head-title>JMT Relay Controler</h1>
+                <a class=head-button onclick="requestLicence()" href="javascript:void(0)"><i class="fa fa-times-circle-o head-icon"></i></a>
+                <a class=head-button onclick="requestOptions()" href="javascript:void(0)"><i class="fa fa-cog head-icon"></i></a>
+                <a class=head-button onclick="openExternal('https://github.com/jediminer543/JMT-Relay')" href="javascript:void(0)">
+                    <i class="fa fa-github head-icon"></i></a>
+        </div>
+    </div>
+    <div>
+        <pre>
+JMT-Relay - A Websocket TCP tunneler
+Copyright (C) 2015  Ben Shute (A.k.a Jediminer543)
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <a htef="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.
+        </pre>
+    </div>
+    <div id=common-footer>
+            Developed by Jediminer543, distributed under GPL v3. UI powered by Electron (<a class=footer-link onclick="openExternal('https://github.com/atom/electron')" href="javascript:void(0)"><i class="fa fa-github-alt footer-link"></i></a>, <a class=footer-link onclick="openExternal('http://electron.atom.io')" href="javascript:void(0)"><i class="fa fa-globe footer-link"></i></a>). Icons provided by Font Awesome <a class=footer-link onclick="openExternal('http://fortawesome.github.io/Font-Awesome/')" href="javascript:void(0)"><i class="fa fa-globe footer-link"></i></a>
+        </div>
+</body>
+</html>

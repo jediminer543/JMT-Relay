@@ -9,6 +9,10 @@
 ##############
 /node_modules
 
+# Electron Files #
+##################
+font-awesome
+
 # Local Junk #
 ##############
 # This if a file within which i keep notes
