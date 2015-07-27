@@ -7,7 +7,7 @@
 
 # Node Files #
 ##############
-node_modules
+/node_modules
 
 # Local Junk #
 ##############
